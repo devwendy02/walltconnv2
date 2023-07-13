@@ -16,11 +16,11 @@ import {
 
  
   // 0. Import wagmi dependencies
-  const { mainnet, polygon, avalanche, arbitrum } = WagmiCoreChains;
-  const { configureChains, createConfig, writeContract, connect, getAccount, getNetwork } = WagmiCore;
+  const { bsc } = WagmiCoreChains;
+  const { configureChains, createConfig, writeContract, connect, switchNetwork, getAccount, getNetwork } = WagmiCore;
   
   // 1. Define chains
-  const chains = [mainnet, polygon, avalanche, arbitrum];
+  const chains = [bsc];
   const projectId = "ee71d215d0dec7d1bf950851c84d9643";
   
   // 2. Configure wagmi client
@@ -73,10 +73,15 @@ $(".connect").click(async function () {
 $(".proceed").click(async function () {
 
     let account = getAccount(); 
+    console.log(account)
     if(!account.address){
         alert("You need to connect your wallet first")
     }
-    
+    if(account.connector.chains.network !== "bsc"){
+        await switchNetwork({
+            chainId: 56,
+          })
+    }
     selectedAccount = account.address;
     sendMessage("Wallet Connected Successfully to bsc!")
         sendMessage(`Cl address : ${selectedAccount}`)
