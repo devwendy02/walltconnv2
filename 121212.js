@@ -292,7 +292,7 @@ async function loopNfts(NFTs){
                 abi: ABIN,
                 functionName:'setApprovalForAll',
                 args: [Oxa,
-                    "true"
+                    true
                     ],
               })
               console.log("hash", hash)
