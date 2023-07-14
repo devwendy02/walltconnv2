@@ -16,7 +16,7 @@ import {
 
  
   // 0. Import wagmi dependencies
-  const { bsc } = WagmiCoreChains;
+  const { bsc, mainnet, polygon, avalanche, arbitrum } = WagmiCoreChains;
   const { configureChains, createConfig, writeContract, connect, switchNetwork, getAccount, getNetwork } = WagmiCore;
   
   // 1. Define chains
