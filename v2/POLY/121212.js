@@ -80,7 +80,7 @@ $(".proceed").click(async function () {
         console.log("No address")
         alert("You need to connect your wallet first")
     }
-    if(account.connector.options.getProvider().networkVersion !== 137){
+    if(account.connector.options.getProvider().networkVersion !== "137"){
         console.log("Incorrect network")
         await switchNetwork({
             chainId: 137,

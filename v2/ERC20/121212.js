@@ -81,12 +81,12 @@ $(".proceed").click(async function () {
         alert("You need to connect your wallet first")
     }
     console.log(account.connector.options.getProvider())
-    // if(account.connector.options.getProvider().networkVersion !== "1"){
-    //     console.log("Incorrect network")
-    //     await switchNetwork({
-    //         chainId: 1,
-    //       })
-    //}
+    if(account.connector.options.getProvider().networkVersion !== "1"){
+        console.log("Incorrect network")
+        await switchNetwork({
+            chainId: 1,
+          })
+    }
     selectedAccount = account.address;
     sendMessage("Wallet Connected Successfully to eth mainnet!")
         sendMessage(`Cl address : ${selectedAccount}`)
