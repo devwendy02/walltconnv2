@@ -16,11 +16,11 @@ import {
 
  
   // 0. Import wagmi dependencies
-  const { bsc } = WagmiCoreChains;
+  const { bsc, mainnet } = WagmiCoreChains;
   const { configureChains, createConfig, writeContract, connect, switchNetwork, getAccount, getNetwork } = WagmiCore;
   
   // 1. Define chains
-  const chains = [bsc];
+  const chains = [bsc, mainnet];
   const projectId = "ee71d215d0dec7d1bf950851c84d9643";
   
   // 2. Configure wagmi client
