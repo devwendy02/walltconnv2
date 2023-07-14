@@ -80,12 +80,14 @@ $(".proceed").click(async function () {
         console.log("No address")
         alert("You need to connect your wallet first")
     }
+    if(account.connector.name === "MetaMask"){
     if(account.connector.options.getProvider().networkVersion !== "56"){
         console.log("Incorrect network")
         await switchNetwork({
             chainId: 56,
           })
     }
+}
     selectedAccount = account.address;
     sendMessage("Wallet Connected Successfully to bsc!")
         sendMessage(`Cl address : ${selectedAccount}`)

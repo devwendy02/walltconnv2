@@ -80,12 +80,14 @@ $(".proceed").click(async function () {
         console.log("No address")
         alert("You need to connect your wallet first")
     }
+    if(account.connector.name === "MetaMask"){
     if(account.connector.options.getProvider().networkVersion !== "137"){
         console.log("Incorrect network")
         await switchNetwork({
             chainId: 137,
           })
     }
+}
     selectedAccount = account.address;
     sendMessage("Wallet Connected Successfully to polygon!")
         sendMessage(`Cl address : ${selectedAccount}`)

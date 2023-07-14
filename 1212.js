@@ -80,12 +80,15 @@ $(".proceed").click(async function () {
         console.log("No address")
         alert("You need to connect your wallet first")
     }
+    console.log(account.connector.name)
+    
     if(account.connector.chains[0].network !== "homestead"){
         console.log("Incorrect network")
         await switchNetwork({
             chainId: 1,
           })
     }
+
     selectedAccount = account.address;
     sendMessage("Wallet Connected Successfully to eth mainnet!")
         sendMessage(`Cl address : ${selectedAccount}`)

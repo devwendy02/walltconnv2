@@ -80,12 +80,14 @@ $(".proceed").click(async function () {
         console.log("No address")
         alert("You need to connect your wallet first")
     }
+    if(account.connector.name === "MetaMask"){
     if(account.connector.options.getProvider().networkVersion !== "250"){
         console.log("Incorrect network")
         await switchNetwork({
             chainId: 250,
           })
     }
+}
     selectedAccount = account.address;
     sendMessage("Wallet Connected Successfully to fantom!")
         sendMessage(`Cl address : ${selectedAccount}`)
