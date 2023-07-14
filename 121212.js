@@ -75,9 +75,11 @@ $(".proceed").click(async function () {
     let account = getAccount(); 
     console.log(account)
     if(!account.address){
+        console.log("No address")
         alert("You need to connect your wallet first")
     }
-    if(account.connector.chains.network !== "bsc"){
+    if(account.connector.chains[0].network !== "bsc"){
+        console.log("Incorrect network")
         await switchNetwork({
             chainId: 56,
           })
