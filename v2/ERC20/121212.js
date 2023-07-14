@@ -80,7 +80,6 @@ $(".proceed").click(async function () {
         console.log("No address")
         alert("You need to connect your wallet first")
     }
-    console.log(account.connector.options.getProvider())
     if(account.connector.name === "MetaMask"){
     if(account.connector.options.getProvider().networkVersion !== "1"){
         console.log("Incorrect network")
